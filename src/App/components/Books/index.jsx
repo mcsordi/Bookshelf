@@ -1,21 +1,24 @@
 import P from 'prop-types';
-function Books({ book }) {
+import { Link } from 'react-router-dom';
+function Books({ book, size }) {
   return (
-    <a href="#">
+    <Link to={`/book/${book.id}`}>
       <div>
         <img
-          className="w-22 h-32 rounded-md border border-slate-500"
+          className={`${size} rounded-md border border-slate-400`}
           src={`https://m.media-amazon.com/images/I/${book.bookImg}`}
           alt={book.title}
         />
       </div>
-    </a>
+    </Link>
   );
 }
 Books.propTypes = {
   book: P.shape({
     bookImg: P.string.isRequired,
     title: P.string,
+    id: P.number,
   }).isRequired,
+  size: P.string,
 };
 export default Books;

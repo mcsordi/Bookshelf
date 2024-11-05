@@ -5,7 +5,7 @@ import Nav from '../Nav';
 function Header() {
   return (
     <>
-      <header className="px-3 justify-between flex sm:justify-around items-baseline sm:px-6 py-5 w-full bg-slate-500">
+      <header className="px-3 top-0 justify-between flex sm:justify-around items-baseline sm:px-6 py-5 w-full bg-slate-500">
         <Logo />
         <InputBook display={`hidden md:flex`} />
         <Nav />

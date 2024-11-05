@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import Header from './App/components/Header';
-import RenderBooks from './App/components/RenderBooks';
-import RenderCategories from './App/components/RenderCategories';
-import { useFetch } from './utils/useFetch';
+import RenderBooks from '../../components/RenderBooks';
+import RenderCategories from '../../components/RenderCategories';
+import { useFetch } from '../../../utils/useFetch';
 
-function App() {
+function Home() {
   const { data, loading, error } = useFetch([
     process.env.REACT_APP_HIGHLIGHTS,
     process.env.REACT_APP_BOOKS,
     process.env.REACT_APP_CATEGORIES,
   ]);
+
   const [target, setTarget] = useState('Finanças');
   const highlights = data[0];
   const books = data[1];
@@ -23,13 +23,12 @@ function App() {
   }
   const filterBooks = books.filter((book) => book.category == target && book);
   return (
-    <section className="bg-slate-200 h-screen w-full">
-      <Header />
-      <RenderBooks display={'flex'} data={highlights} />
+    <>
+      <RenderBooks size={`w-22 h-32`} display={'flex'} data={highlights} />
       <RenderCategories target={target} setTarget={setTarget} data={categories} />
-      <RenderBooks display={'hidden'} data={filterBooks} />
-    </section>
+      <RenderBooks size={`w-22 h-32`} display={'hidden'} data={filterBooks} />
+    </>
   );
 }
 
-export default App;
+export default Home;

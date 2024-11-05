@@ -20,6 +20,7 @@ function useFetch(urls) {
     };
 
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   return { data, loading, error };
