@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import RenderBooks from '../../components/RenderBooks';
-import RenderCategories from '../../components/RenderCategories';
+import RenderBooks from '../../components/book/RenderBooks';
+import RenderCategories from '../../components/book/RenderCategories';
 import { useFetch } from '../../../utils/useFetch';
 
 function Home() {
@@ -14,6 +14,7 @@ function Home() {
   const highlights = data[0];
   const books = data[1];
   const categories = data[2];
+  const imageUrl = `https://m.media-amazon.com/images/I`;
 
   if (loading) {
     return <div>loading...</div>;
@@ -24,9 +25,9 @@ function Home() {
   const filterBooks = books.filter((book) => book.category == target && book);
   return (
     <>
-      <RenderBooks size={`w-22 h-32`} display={'flex'} data={highlights} />
+      <RenderBooks image={imageUrl} size={`w-22 h-32`} display={'flex'} data={highlights} />
       <RenderCategories target={target} setTarget={setTarget} data={categories} />
-      <RenderBooks size={`w-22 h-32`} display={'hidden'} data={filterBooks} />
+      <RenderBooks image={imageUrl} size={`w-22 h-32`} display={'hidden'} data={filterBooks} />
     </>
   );
 }

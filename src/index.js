@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './App/pages/Home/index.jsx';
 import Book from './App/pages/Book/index.jsx';
 import MirrorPage from './App/pages/MirrorPage/index.jsx';
+import Writer from './App/pages/Writer/index.jsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     element: <MirrorPage />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/book/:id', element: <Book /> },
+      { path: '/book/:id/:writerId', element: <Book /> },
+      { path: '/writer/:writerId', element: <Writer /> },
     ],
   },
 ]);

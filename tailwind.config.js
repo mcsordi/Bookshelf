@@ -4,5 +4,8 @@ export const theme = {
   fontFamily: {
     nunito: ['Nunito'],
   },
+  backgroundImage: {
+    bookshelf: '/bookshelf/jpg',
+  },
 };
 export const plugins = [];

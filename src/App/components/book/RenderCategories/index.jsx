@@ -1,5 +1,5 @@
 import P from 'prop-types';
-import SpreadFetch from '../SpreadFetch';
+import SpreadFetch from '../../SpreadFetch';
 import Category from '../Category';
 
 function RenderCategories({ target, setTarget, data }) {

@@ -1,24 +1,26 @@
 import P from 'prop-types';
 import { Link } from 'react-router-dom';
-function Books({ book, size }) {
+function PosterBook({ book, size, image = '' }) {
   return (
-    <Link to={`/book/${book.id}`}>
+    <Link to={`/book/${book.id}/${book.writerId}`}>
       <div>
         <img
           className={`${size} rounded-md border border-slate-400`}
-          src={`https://m.media-amazon.com/images/I/${book.bookImg}`}
+          src={`${image}/${book.bookImg}`}
           alt={book.title}
         />
       </div>
     </Link>
   );
 }
-Books.propTypes = {
+PosterBook.propTypes = {
   book: P.shape({
     bookImg: P.string.isRequired,
     title: P.string,
     id: P.number,
+    writerId: P.number,
   }).isRequired,
   size: P.string,
+  image: P.string,
 };
-export default Books;
+export default PosterBook;
