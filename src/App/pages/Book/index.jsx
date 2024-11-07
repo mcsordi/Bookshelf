@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
-import InfoBook from '../../components/book/InfoBook';
+import InfoBook from '../../components/book/BgInfoBook';
 import WriterTag from '../../components/book/WriterTag';
 
 function Book() {
@@ -21,9 +21,11 @@ function Book() {
     return <div>erro...</div>;
   }
   return (
-    <InfoBook image={imageUrl} data={infoBook}>
-      <WriterTag data={infoWriter} />
-    </InfoBook>
+    <div className="mx-auto flex">
+      <InfoBook image={imageUrl} data={infoBook}>
+        <WriterTag data={infoWriter} />
+      </InfoBook>
+    </div>
   );
 }
 export default Book;

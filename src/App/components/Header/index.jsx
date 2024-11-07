@@ -7,10 +7,10 @@ function Header() {
     <>
       <header className="px-3 top-0 justify-between flex sm:justify-around items-baseline sm:px-6 py-5 w-full bg-slate-500">
         <Logo />
-        <InputBook display={`hidden md:flex`} />
+        <InputBook display={`hidden sm:flex`} />
         <Nav />
       </header>
-      <InputBook display={`w-full py-4 px-0 flex md:hidden`} />
+      <InputBook display={`w-full py-4 px-0 flex sm:hidden`} />
     </>
   );
 }

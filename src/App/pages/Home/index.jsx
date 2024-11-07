@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RenderBooks from '../../components/book/RenderBooks';
 import RenderCategories from '../../components/book/RenderCategories';
 import { useFetch } from '../../../utils/useFetch';
+import Poster from '../../components/Poster';
 
 function Home() {
   const { data, loading, error } = useFetch([
@@ -25,6 +26,7 @@ function Home() {
   const filterBooks = books.filter((book) => book.category == target && book);
   return (
     <>
+      <Poster />
       <RenderBooks image={imageUrl} size={`w-22 h-32`} display={'flex'} data={highlights} />
       <RenderCategories target={target} setTarget={setTarget} data={categories} />
       <RenderBooks image={imageUrl} size={`w-22 h-32`} display={'hidden'} data={filterBooks} />
