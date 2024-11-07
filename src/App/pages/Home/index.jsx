@@ -3,6 +3,8 @@ import RenderBooks from '../../components/book/RenderBooks';
 import RenderCategories from '../../components/book/RenderCategories';
 import { useFetch } from '../../../utils/useFetch';
 import Poster from '../../components/Poster';
+import Loading from '../Loading';
+import Error from '../../components/Error';
 
 function Home() {
   const { data, loading, error } = useFetch([
@@ -18,10 +20,10 @@ function Home() {
   const imageUrl = `https://m.media-amazon.com/images/I`;
 
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
   if (error) {
-    return <div>error</div>;
+    return <Error />;
   }
   const filterBooks = books.filter((book) => book.category == target && book);
   return (

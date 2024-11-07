@@ -4,6 +4,8 @@ import SpreadFetch from '../../components/SpreadFetch';
 import SectionWriter from '../../components/writer/SectionWriter';
 import InfoWriter from '../../components/writer/InfoWriter';
 import PosterWriter from '../../components/writer/PosterWriter';
+import Loading from '../Loading';
+import Error from '../../components/Error';
 
 function Writer() {
   const writer = useParams().writerId;
@@ -11,10 +13,10 @@ function Writer() {
   const { data, loading, error } = useFetch([`${url}/${writer}`]);
   const infoWriter = data[0];
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
   if (error) {
-    return <div>error...</div>;
+    return <Error />;
   }
   return (
     <section className="mx-auto">
