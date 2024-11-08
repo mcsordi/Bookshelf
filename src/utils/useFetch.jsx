@@ -21,7 +21,7 @@ function useFetch(urls) {
 
     fetchData();
     //eslint-disable-next-line
-  }, []);
+  }, [urls[0]]);
 
   return { data, loading, error };
 }

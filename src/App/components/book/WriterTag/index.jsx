@@ -1,5 +1,6 @@
 import P from 'prop-types';
 import { Link } from 'react-router-dom';
+
 function WriterTag({ data }) {
   const writerName = data[0].writer;
   const writerId = data[0].writerId;
