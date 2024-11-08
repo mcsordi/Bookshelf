@@ -5,7 +5,7 @@ function WriterSearch({ item }) {
   return (
     <Link to={`/writer/${item.writerId}`}>
       <div
-        className="last:mb-1 border border-gray-300 rounded-sm mt-1
+        className="font-mulish text-lg border border-gray-300 rounded-sm
 flex items-center p-2 w-full h-12"
       >
         {item.writer}

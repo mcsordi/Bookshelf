@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
-import SpreadFetch from '../../components/SpreadFetch';
+import SpreadFetch from '../../components/general/SpreadFetch';
 import SectionWriter from '../../components/writer/SectionWriter';
 import InfoWriter from '../../components/writer/InfoWriter';
 import PosterWriter from '../../components/writer/PosterWriter';
 import Loading from '../Loading';
-import Error from '../../components/Error';
+import Error from '../../components/general/Error';
 
 function Writer() {
   const writer = useParams().writerId;

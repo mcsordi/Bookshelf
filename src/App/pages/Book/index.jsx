@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
 import InfoBook from '../../components/book/BgInfoBook';
 import WriterTag from '../../components/book/WriterTag';
-import Error from '../../components/Error';
+import Error from '../../components/general/Error';
 import Loading from '../Loading';
 
 function Book() {

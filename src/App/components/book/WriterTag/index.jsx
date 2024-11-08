@@ -11,7 +11,7 @@ function WriterTag({ data }) {
         <img className="w-10 rounded-full" src={`${writerImg}`} />
       </Link>
       <Link to={`/writer/${writerId}`}>
-        <p className="px-3">{writerName}</p>
+        <p className="font-mulish font-medium px-3">{writerName}</p>
       </Link>
     </div>
   );

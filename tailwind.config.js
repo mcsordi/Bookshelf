@@ -2,7 +2,9 @@
 export const content = ['./src/**/*.{html,jsx,js}'];
 export const theme = {
   fontFamily: {
-    nunito: ['Nunito'],
+    nunito: ['Nunito', 'serif'],
+    mulish: ['Mulish', 'sans-serif'],
+    noto: ['Noto Sans', 'sans-serif'],
   },
   screens: {
     450: '450px',

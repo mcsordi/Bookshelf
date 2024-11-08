@@ -1,4 +1,4 @@
-import SearchContext from '../../context/searchContext';
+import SearchContext from '../../../context/searchContext';
 import InputBook from '../InputBook';
 import Logo from '../Logo';
 import Nav from '../Nav';

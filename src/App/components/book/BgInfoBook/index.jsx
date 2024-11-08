@@ -1,6 +1,6 @@
 import P from 'prop-types';
 import InformativeImage from '../InformativeImage';
-import SpreadFetch from '../../SpreadFetch';
+import SpreadFetch from '../../general/SpreadFetch';
 import InfoText from '../InfoText';
 function InfoBook({ data, children, image }) {
   return (

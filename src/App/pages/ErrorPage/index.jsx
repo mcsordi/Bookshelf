@@ -1,5 +1,5 @@
 import P from 'prop-types';
-import Header from '../../components/Header';
+import Header from '../../components/general/Header';
 function Error({ text }) {
   return (
     <section className="bg-slate-300 flex flex-col items-center  w-full min-h-screen">

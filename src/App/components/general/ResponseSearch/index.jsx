@@ -1,11 +1,11 @@
 import P from 'prop-types';
 import SpreadFetch from '../SpreadFetch';
-import ItemSearch from '../ItemSearch';
+import BookSearch from '../BookSearch';
 
 function ResponseSearch({ data, text }) {
   return (
     <SpreadFetch data={data}>
-      {(item, id) => item.title?.toLowerCase().includes(text) && <ItemSearch key={id} item={item} id={id} />}
+      {(item, id) => item.title?.toLowerCase().includes(text) && <BookSearch key={id} item={item} id={id} />}
     </SpreadFetch>
   );
 }

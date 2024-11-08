@@ -2,9 +2,9 @@ import { useState } from 'react';
 import RenderBooks from '../../components/book/RenderBooks';
 import RenderCategories from '../../components/book/RenderCategories';
 import { useFetch } from '../../../utils/useFetch';
-import Poster from '../../components/Poster';
+import Poster from '../../components/general/Poster';
 import Loading from '../Loading';
-import Error from '../../components/Error';
+import Error from '../../components/general/Error';
 
 function Home() {
   const { data, loading, error } = useFetch([
