@@ -8,15 +8,25 @@ import Book from './App/pages/Book/index.jsx';
 import MirrorPage from './App/pages/MirrorPage/index.jsx';
 import Writer from './App/pages/Writer/index.jsx';
 import Error from './App/pages/ErrorPage/index.jsx';
+import Login from './App/pages/Login/index.jsx';
+import Cadaster from './App/pages/Cadaster/index.jsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <Login />,
+  },
+  {
+    path: '/cadaster',
+    element: <Cadaster />,
+  },
+  {
+    path: '/',
     element: <MirrorPage />,
     errorElement: <Error text={`Página não Encontrada`} />,
     children: [
-      { path: '/', element: <Home /> },
+      { path: '/home', element: <Home /> },
       { path: '/book/:id/:writerId', element: <Book /> },
       { path: '/writer/:writerId', element: <Writer /> },
     ],

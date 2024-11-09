@@ -15,6 +15,8 @@ export const theme = {
   },
   backgroundImage: {
     error: "url('/public/booksError.svg')",
+    poster: "url('/public/poster.png')",
+    poster2: "url('/public/poster2.png')",
   },
 };
 export const plugins = [];
