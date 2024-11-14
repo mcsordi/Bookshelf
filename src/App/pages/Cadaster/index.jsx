@@ -3,7 +3,8 @@ import Form from '../../components/user/Form';
 import Logo from '../../components/user/Logo';
 import { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
-const fetchPostUser = async (email, pass, setLoad, setRes) => {
+import { TbError404 } from 'react-icons/tb';
+const fetchPostUser = async (email, pass, setLoad, setRes, setError) => {
   try {
     setLoad(true);
     const res = await fetch(process.env.REACT_APP_USERS, {
@@ -13,7 +14,7 @@ const fetchPostUser = async (email, pass, setLoad, setRes) => {
     });
     return setRes(await res.json());
   } catch (error) {
-    return error;
+    return setError(error);
   } finally {
     setLoad(false);
   }
@@ -41,10 +42,11 @@ function Cadaster() {
   const [email, setEmail] = useState();
   const [res, setRes] = useState('');
   const [load, setLoad] = useState();
+  const [error, setError] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    return fetchPostUser(email, pass, setLoad, setRes);
+    return fetchPostUser(email, pass, setLoad, setRes, setError);
   };
 
   return (
@@ -66,6 +68,7 @@ function Cadaster() {
           {optionsMessages(res)}
         </Form>
         {load && <BiLoader className="animate-spin text-3xl bottom-56 absolute mx-auto text-center" />}
+        {error && <TbError404 className="text-3xl bottom-56 absolute mx-auto text-center" />}
       </div>
       <div className="hidden md:flex w-full h-full mx-auto border bg-cover bg-center bg-no-repeat bg-poster2"></div>
     </section>
