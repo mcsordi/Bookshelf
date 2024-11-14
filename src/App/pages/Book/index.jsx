@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
 import InfoBook from '../../components/book/BgInfoBook';
 import WriterTag from '../../components/book/WriterTag';
@@ -14,6 +14,11 @@ function Book() {
   const infoBook = data[0];
   const infoWriter = data[1];
   const imageUrl = `https://m.media-amazon.com/images/I`;
+  const userStorage = localStorage.getItem('userEmail');
+
+  if (!userStorage) {
+    return <Navigate to="/" />;
+  }
 
   if (loading) {
     return <Loading />;

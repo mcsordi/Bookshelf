@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
 import SpreadFetch from '../../components/general/SpreadFetch';
 import SectionWriter from '../../components/writer/SectionWriter';
@@ -12,6 +12,10 @@ function Writer() {
   const url = process.env.REACT_APP_WRITER;
   const { data, loading, error } = useFetch([`${url}/${writer}`]);
   const infoWriter = data[0];
+  const userStorage = localStorage.getItem('userEmail');
+  if (!userStorage) {
+    return <Navigate to={`/`} />;
+  }
   if (loading) {
     return <Loading />;
   }

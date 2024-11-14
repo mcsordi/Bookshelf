@@ -2,33 +2,58 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/user/Form';
 import Logo from '../../components/user/Logo';
 import { useState } from 'react';
+import { BiLoader } from 'react-icons/bi';
+const fetchPostUser = async (email, pass, setLoad, setRes) => {
+  try {
+    setLoad(true);
+    const res = await fetch(process.env.REACT_APP_USERS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: pass }),
+    });
+    return setRes(await res.json());
+  } catch (error) {
+    return error;
+  } finally {
+    setLoad(false);
+  }
+};
+
+const optionsMessages = (res) => {
+  switch (res) {
+    case undefined: {
+      return;
+    }
+    case '': {
+      return;
+    }
+    case `Busca não possui resultados`: {
+      return <li className="absolute bottom-48 text-green-700 font-semibold">Novo usuário criado</li>;
+    }
+    default: {
+      return <li className="absolute bottom-48 text-red-600  font-semibold">Email já existente</li>;
+    }
+  }
+};
 
 function Cadaster() {
-  const [click, setClick] = useState();
   const [pass, setPass] = useState();
   const [email, setEmail] = useState();
+  const [res, setRes] = useState('');
+  const [load, setLoad] = useState();
 
-  const handleEmail = () => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const isValid = regex.test(email);
-    const responseTest = click && isValid;
-    if (!responseTest) {
-      return <li className="absolute bottom-40 text-red-600 font-medium">email inválido</li>;
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    return fetchPostUser(email, pass, setLoad, setRes);
   };
-  const handlePass = () => {
-    const length = pass?.length;
-    const isValid = click && length > 5;
-    if (!isValid) {
-      return <li className="absolute bottom-48 text-red-600 font-medium">A senha precisa ter 6 caracteres</li>;
-    }
-  };
+
   return (
     <section className="bg-slate-50 flex h-screen w-full items-center justify-center">
       <div className=" flex flex-col p-5 items-center gap-8 justify-center">
         <Logo />
         <Form
-          onClick={(e) => setClick(e)}
+          loading={load}
+          handleSubmit={handleSubmit}
           setEmail={(e) => setEmail(e)}
           setPass={(e) => setPass(e)}
           idMail={'email'}
@@ -38,14 +63,13 @@ function Cadaster() {
           <div className="text-end">
             <Link to={'/'}>Login</Link>
           </div>
+          {optionsMessages(res)}
         </Form>
-        <div className="flex w-full  justify-start">
-          {click && handleEmail()}
-          {click && handlePass()}
-        </div>
+        {load && <BiLoader className="animate-spin text-3xl bottom-56 absolute mx-auto text-center" />}
       </div>
       <div className="hidden md:flex w-full h-full mx-auto border bg-cover bg-center bg-no-repeat bg-poster2"></div>
     </section>
   );
 }
+
 export default Cadaster;

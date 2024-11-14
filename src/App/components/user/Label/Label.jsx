@@ -1,6 +1,6 @@
 import P from 'prop-types';
 function Label({ textLabel, htmlFor }) {
-  return <label htmlFor={htmlFor}> {textLabel}</label>;
+  return <label htmlFor={htmlFor}>{textLabel}</label>;
 }
 Label.propTypes = {
   textLabel: P.string,

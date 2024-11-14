@@ -5,6 +5,7 @@ import { useFetch } from '../../../utils/useFetch';
 import Poster from '../../components/general/Poster';
 import Loading from '../Loading';
 import Error from '../../components/general/Error';
+import { Navigate } from 'react-router-dom';
 
 function Home() {
   const { data, loading, error } = useFetch([
@@ -12,13 +13,16 @@ function Home() {
     process.env.REACT_APP_BOOKS,
     process.env.REACT_APP_CATEGORIES,
   ]);
+  const userStorage = localStorage.getItem('userEmail');
 
   const [target, setTarget] = useState('Finanças');
   const highlights = data[0];
   const books = data[1];
   const categories = data[2];
   const imageUrl = `https://m.media-amazon.com/images/I`;
-
+  if (!userStorage) {
+    return <Navigate to={`/`} />;
+  }
   if (loading) {
     return <Loading />;
   }

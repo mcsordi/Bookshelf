@@ -1,17 +1,11 @@
 import P from 'prop-types';
-function Button({ textBtn, onClick }) {
+function Button({ textBtn, loading }) {
   return (
     <button
-      onClick={(evt) => {
-        return (
-          evt.preventDefault(),
-          onClick(evt.target),
-          setTimeout(() => {
-            onClick('');
-          }, 1000)
-        );
-      }}
-      className="text-slate-950 text-lg font-medium bg-yellow-500  mt-2 p-3 rounded-md"
+      disabled={loading == true}
+      className={`text-slate-950 text-lg font-medium hover:ring-2 hover:ring-gray-400
+         ${loading ? `bg-gray-500 text-white` : `bg-yellow-500`} transition-all  mt-2 p-3 rounded-md`}
+      type="submit"
     >
       {textBtn}
     </button>
@@ -19,6 +13,6 @@ function Button({ textBtn, onClick }) {
 }
 Button.propTypes = {
   textBtn: P.string,
-  onClick: P.func,
+  loading: P.bool,
 };
 export default Button;
