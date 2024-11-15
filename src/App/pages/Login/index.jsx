@@ -1,7 +1,7 @@
 import { Link, Navigate } from 'react-router-dom';
 import Form from '../../components/user/Form';
 import Logo from '../../components/user/Logo';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
 import { TbError404 } from 'react-icons/tb';
 
@@ -25,19 +25,17 @@ function Login() {
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
   const [click, setClick] = useState();
-  // const existEmail = data?.filter((user) => user.email == email && user);
-  const existUser = data?.filter((user) => user.password == pass && user.email == email && user);
 
-  useEffect(() => {
-    getUsers(setLoading, setError, setData);
-  }, [click]);
+  const existUser = data?.filter((user) => user.password == pass && user.email == email && user);
 
   if (localStorage.getItem('userEmail')?.length > 0) {
     return <Navigate to={`/home`} />;
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setClick(e);
+    getUsers(setLoading, setError, setData);
     if (existUser?.length > 0) {
       localStorage.setItem('userEmail', email);
       return <Navigate to={'/home'} />;
@@ -55,6 +53,7 @@ function Login() {
           idMail={'email'}
           idPass={`password`}
           textBtn={`Logar`}
+          loading={loading}
         >
           <div className="text-end">
             <Link to={'/cadaster'}>Cadastrar</Link>

@@ -23,6 +23,7 @@ function Book() {
   if (loading) {
     return <Loading />;
   }
+
   if (error) {
     return <Error />;
   }

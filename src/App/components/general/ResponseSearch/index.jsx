@@ -5,7 +5,7 @@ import BookSearch from '../BookSearch';
 function ResponseSearch({ data, text }) {
   return (
     <SpreadFetch data={data}>
-      {(item, id) => item.title?.toLowerCase().includes(text) && <BookSearch key={id} item={item} id={id} />}
+      {(book, id) => book.title?.toLowerCase().includes(text) && <BookSearch key={id} book={book} id={id} />}
     </SpreadFetch>
   );
 }

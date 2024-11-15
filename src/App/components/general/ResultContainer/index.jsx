@@ -23,10 +23,12 @@ function ResultContainer({ text }) {
     >
       <ResponseSearch data={bookData} text={text} />
       <SpreadFetch data={writerData}>
-        {(item, id) => item.writer?.toLowerCase().includes(text) && <WriterSearch key={id} item={item} />}
+        {(item, id) => {
+          return item.writer?.toLowerCase().includes(text) && <WriterSearch key={id} item={item} />;
+        }}
       </SpreadFetch>
       {bookResults?.length < 1 && writerResults?.length < 1 && (
-        <div className="px-2 py-2 font-mulish text-lg">Ops, nenhum item disponivel.</div>
+        <div className="px-2 py-2 font-mulish border rounded-sm text-lg">Ops, nenhum resultado disponivel.</div>
       )}
     </div>
   );

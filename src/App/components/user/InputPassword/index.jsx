@@ -4,13 +4,13 @@ import { FaEye } from 'react-icons/fa';
 
 function InputPassword({ id, setPass }) {
   const focus = useRef();
-  const [sight, setSight] = useState('text');
+  const [sight, setSight] = useState('password');
   return (
     <div className="relative ">
       <FaEye
         className={`${sight == 'password' && `text-slate-500`} absolute mx-auto my-auto right-0 text-xl mt-4 mr-4`}
         onClick={() => {
-          return sight == 'text' ? setSight('password') : setSight('text'), focus.current.focus();
+          return sight == 'password' ? setSight('text') : setSight('password'), focus.current.focus();
         }}
       />
       <input
