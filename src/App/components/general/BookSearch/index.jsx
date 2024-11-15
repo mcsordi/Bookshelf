@@ -10,7 +10,9 @@ function BookSearch({ book }) {
     <Link
       to={`/book/${book.id}/${book.writerId}`}
       className="hover:ring-2 hover:ring-slate-500 font-mulish text-lg p-2 border border-gray-300 rounded-sm flex items-center w-full h-12"
-      onClick={() => setValue(true)}
+      onClick={() => {
+        return setValue(true), console.log(book.title);
+      }}
     >
       {book.title}
     </Link>

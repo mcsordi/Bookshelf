@@ -16,7 +16,7 @@ function InputPassword({ id, setPass }) {
       <input
         id={id}
         ref={focus}
-        className="rounded-md pl-2 pr-11 py-3.5 outline-none focus:ring-1 focus:ring-gray-400 border border-gray-300 sm:w-96 "
+        className="rounded-md pl-2 pr-11 py-3.5 outline-none focus:ring-1 focus:ring-gray-400 border border-gray-300 w-full"
         type={sight}
         required
         minLength={6}

@@ -3,7 +3,7 @@ import Form from '../../components/user/Form';
 import Logo from '../../components/user/Logo';
 import { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
-import { TbError404 } from 'react-icons/tb';
+
 const fetchPostUser = async (email, pass, setLoad, setRes, setError) => {
   try {
     setLoad(true);
@@ -63,12 +63,18 @@ function Cadaster() {
           textBtn={`Cadastrar`}
         >
           <div className="text-end">
-            <Link to={'/'}>Login</Link>
+            <Link className="text-gray-500 font-medium" to={'/'}>
+              Login
+            </Link>
           </div>
-          {optionsMessages(res)}
+          {!load && optionsMessages(res)}
         </Form>
-        {load && <BiLoader className="animate-spin text-3xl bottom-56 absolute mx-auto text-center" />}
-        {error && <TbError404 className="text-3xl bottom-56 absolute mx-auto text-center" />}
+        {load && <BiLoader className="absolute text-2xl animate-spin bottom-64 flex mx-auto" />}
+        {error && (
+          <div className="absolute bottom-40 text-red-600 font-semibold font-noto max-w-56">
+            Ocorreu um erro inesperado, por favor recarregue a página
+          </div>
+        )}
       </div>
       <div className="hidden md:flex w-full h-full mx-auto border bg-cover bg-center bg-no-repeat bg-poster2"></div>
     </section>

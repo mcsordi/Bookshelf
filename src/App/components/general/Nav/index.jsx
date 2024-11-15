@@ -18,9 +18,7 @@ function Nav() {
           {capitalLetter}
         </div>
 
-        <a className="hidden w-40 truncate md:w-full  md:flex" href="#">
-          {user}
-        </a>
+        <p className="font-nunito text-lg hidden w-40 truncate md:w-full  md:flex">{user}</p>
       </nav>
       <DisplayMenu />
     </>

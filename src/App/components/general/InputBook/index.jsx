@@ -35,7 +35,7 @@ function InputBook({ display }) {
           onBlur={() =>
             setTimeout(() => {
               setValue(true);
-            }, 100)
+            }, 300)
           }
         />
       </div>

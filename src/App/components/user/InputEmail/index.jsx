@@ -6,7 +6,7 @@ function InputEmail({ id, type, setEmail }) {
     <input
       ref={focus}
       id={id}
-      className="rounded-md px-2 py-3.5 border outline-none focus:ring-1 focus:ring-gray-400 border-gray-300 sm:w-96"
+      className="rounded-md px-2 py-3.5 border outline-none focus:ring-1 focus:ring-gray-400 border-gray-300 w-full"
       type={type}
       name={type}
       required
