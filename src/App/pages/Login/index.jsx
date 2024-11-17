@@ -1,8 +1,14 @@
 import { Link, Navigate } from 'react-router-dom';
 import Form from '../../components/user/Form';
-import Logo from '../../components/user/Logo';
-import { useState } from 'react';
+import Logo from '../../components/general/Logo';
+import { useContext, useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
+import GoingTo from '../../components/loginCadaster/GoingTo';
+import LogError from '../../components/loginCadaster/LogError ';
+import LoginPoster from '../../components/loginCadaster/LoginPoster';
+import FormContainer from '../../components/loginCadaster/FormContainer';
+import MainContainer from '../../components/loginCadaster/MainContainer';
+import { emailAdress } from '../../../App/context/emailContext';
 
 const getUsers = async (setLoading, setError) => {
   try {
@@ -24,6 +30,23 @@ function Login() {
   const [error, setError] = useState();
   const [click, setClick] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState();
+  const [validEmail, setValidEmail] = useState('');
+  const [forgotError, setForgotError] = useState();
+  const [invalidError, setInvalidError] = useState();
+  const { setAdress } = useContext(emailAdress);
+
+  const emailValidate = async () => {
+    const data = await getUsers(setLoading, setError);
+    const exist = await data.find((adress) => adress.email == email);
+    if (exist) {
+      return setValidEmail(exist), setAdress(exist.email);
+    } else {
+      return setForgotError(`Insira um endereço de email valido`);
+    }
+  };
+  if (validEmail) {
+    return <Navigate to={`/forgot`} />;
+  }
 
   if (localStorage.getItem('userEmail')?.length > 0) {
     return <Navigate to={`/home`} />;
@@ -35,11 +58,13 @@ function Login() {
     const data = await getUsers(setLoading, setError);
     if (data) {
       const existUser = await data.find((user) => user.password === pass && user.email === email);
-
       if (existUser) {
         localStorage.setItem('userEmail', email);
         setIsAuthenticated(true);
       }
+    }
+    if (!loading && !error) {
+      return setInvalidError(`Senha ou Email estão invalidos`);
     }
   };
 
@@ -47,9 +72,9 @@ function Login() {
     return <Navigate to={'/home'} />;
   }
   return (
-    <section className="bg-slate-50 flex h-screen items-center justify-center">
-      <div className="flex flex-col p-5 items-center gap-8 justify-center">
-        <Logo />
+    <MainContainer>
+      <FormContainer>
+        <Logo whereTo={'/'} />
         <Form
           handleSubmit={handleSubmit}
           setPass={(e) => setPass(e)}
@@ -58,25 +83,33 @@ function Login() {
           idPass={`password`}
           textBtn={`Logar`}
           loading={loading}
-        >
-          <div className="text-end">
-            <Link className="text-gray-500 font-medium" to={'/cadaster'}>
-              Cadastrar
+          forget={
+            <Link
+              className={`hover:text-blue-700 text-gray-500 font-medium`}
+              to={`#`}
+              onClick={() => {
+                return emailValidate();
+              }}
+            >
+              Esqueci a senha
             </Link>
+          }
+        >
+          <div className="flex justify-between text-start ">
+            <GoingTo onClick={() => ''} text={`Cadastrar`} destiny={`/cadaster`} />
           </div>
           {click && !loading && !error && (
-            <li className="absolute bottom-48 text-red-600 font-semibold">Senha ou Email estão invalidos</li>
+            <li className="absolute bottom-40 text-red-600 font-semibold">{invalidError}</li>
           )}
+          {error && <LogError />}
         </Form>
-        {click && loading && <BiLoader className="absolute text-2xl animate-spin bottom-64 flex mx-auto" />}
-        {error && (
-          <div className=" bottom-40 text-red-600 font-semibold font-noto max-w-56">
-            Ocorreu um erro inesperado, por favor recarregue a página
-          </div>
+        {loading && <BiLoader className="flex absolute text-2xl animate-spin bottom-48  mx-auto" />}
+        {!validEmail && !invalidError && (
+          <div className="absolute bottom-40 text-red-600 font-semibold">{forgotError}</div>
         )}
-      </div>
-      <div className="hidden md:flex w-full h-full mx-auto border bg-cover bg-center bg-no-repeat bg-poster"></div>
-    </section>
+      </FormContainer>
+      <LoginPoster poster="bg-poster" />
+    </MainContainer>
   );
 }
 export default Login;

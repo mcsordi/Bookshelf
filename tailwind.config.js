@@ -16,7 +16,7 @@ export const theme = {
   backgroundImage: {
     error: "url('/public/images/booksError.svg')",
     poster: "url('/public/images/poster.png')",
-    poster2: "url('/public/images/poster2.png')",
+    cadaster: "url('/public/images/poster2.png')",
     homePoster: "url('/public/images/bookshelf.jpg')",
   },
 };

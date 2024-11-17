@@ -13,7 +13,7 @@ function Header() {
         <InfoUserContext>
           <PasswordContext>
             <header className="px-3 top-0 justify-between flex sm:justify-around items-baseline sm:px-6 py-5 w-full bg-slate-500">
-              <Logo />
+              <Logo whereTo={`/home`} />
               <InputBook display={`hidden sm:flex sm:flex-col`} />
               <Nav />
             </header>

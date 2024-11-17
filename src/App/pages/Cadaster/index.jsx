@@ -1,8 +1,13 @@
-import { Link } from 'react-router-dom';
 import Form from '../../components/user/Form';
-import Logo from '../../components/user/Logo';
+import Logo from '../../components/general/Logo';
 import { useState } from 'react';
 import { BiLoader } from 'react-icons/bi';
+import GoingTo from '../../components/loginCadaster/GoingTo';
+import LogError from '../../components/loginCadaster/LogError ';
+import LoginPoster from '../../components/loginCadaster/LoginPoster';
+import { optionsMessages } from '../../components/loginCadaster/optionsCadaster';
+import FormContainer from '../../components/loginCadaster/FormContainer';
+import MainContainer from '../../components/loginCadaster/MainContainer';
 
 const fetchPostUser = async (email, pass, setLoad, setRes, setError) => {
   try {
@@ -20,23 +25,6 @@ const fetchPostUser = async (email, pass, setLoad, setRes, setError) => {
   }
 };
 
-const optionsMessages = (res) => {
-  switch (res) {
-    case undefined: {
-      return;
-    }
-    case '': {
-      return;
-    }
-    case `Busca não possui resultados`: {
-      return <li className="absolute bottom-48 text-green-700 font-semibold">Novo usuário criado</li>;
-    }
-    default: {
-      return <li className="absolute bottom-48 text-red-600  font-semibold">Email já existente</li>;
-    }
-  }
-};
-
 function Cadaster() {
   const [pass, setPass] = useState();
   const [email, setEmail] = useState();
@@ -50,9 +38,9 @@ function Cadaster() {
   };
 
   return (
-    <section className="bg-slate-50 flex h-screen w-full items-center justify-center">
-      <div className=" flex flex-col p-5 items-center gap-8 justify-center">
-        <Logo />
+    <MainContainer>
+      <FormContainer>
+        <Logo whereTo={`/`} />
         <Form
           loading={load}
           handleSubmit={handleSubmit}
@@ -62,22 +50,16 @@ function Cadaster() {
           idPass={`password`}
           textBtn={`Cadastrar`}
         >
-          <div className="text-end">
-            <Link className="text-gray-500 font-medium" to={'/'}>
-              Login
-            </Link>
+          <div className="text-start">
+            <GoingTo onClick={() => ''} text={`Logar`} destiny={`/`} />
           </div>
           {!load && optionsMessages(res)}
         </Form>
-        {load && <BiLoader className="absolute text-2xl animate-spin bottom-64 flex mx-auto" />}
-        {error && (
-          <div className="absolute bottom-40 text-red-600 font-semibold font-noto max-w-56">
-            Ocorreu um erro inesperado, por favor recarregue a página
-          </div>
-        )}
-      </div>
-      <div className="hidden md:flex w-full h-full mx-auto border bg-cover bg-center bg-no-repeat bg-poster2"></div>
-    </section>
+        {load && <BiLoader className="absolute text-2xl animate-spin bottom-48 flex mx-auto" />}
+        {error && <LogError />}
+      </FormContainer>
+      <LoginPoster poster="bg-cadaster" />
+    </MainContainer>
   );
 }
 
