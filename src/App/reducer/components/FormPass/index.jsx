@@ -24,7 +24,6 @@ function FormPass() {
   const [click, setClick] = useState(false);
   const [pass, setPass] = useState();
   const [loading, setLoading] = useState();
-
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
@@ -43,19 +42,18 @@ function FormPass() {
         value={emailValue}
       />
       <label htmlFor="pass">Senha</label>
-      <InputPassword setPass={(e) => setPass(e)} id={`pass`} />
+      <InputPassword value={pass} setPass={(e) => setPass(e)} id={`pass`} />
       <Button loading={loading} textBtn={`Alterar`} />
       <div className="mt-2 flex mx-auto">
         {loading && !error && <BiLoader className="text-2xl animate-spin" />}
         {click && !loading && !error && (
-          <div className="text-green-600 mt-5 border-b-2 py-0 font-medium">Sua senha foi modificada</div>
+          <div className={`text-green-600 mt-5 border-b-2 py-0 font-medium`}>Sua senha foi modificada</div>
         )}
         {error && (
-          <div className="text-red-600 mt-5 border-b-2 py-0 font-medium">Não foi possivel modificar sua senha</div>
+          <div className={`text-red-600 mt-5 border-b-2 py-0 font-medium`}>Não foi possivel modificar sua senha</div>
         )}
       </div>
     </form>
   );
 }
-
 export default FormPass;

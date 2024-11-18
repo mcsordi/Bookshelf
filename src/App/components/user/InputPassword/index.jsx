@@ -2,7 +2,7 @@ import P from 'prop-types';
 import { useRef, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 
-function InputPassword({ id, setPass }) {
+function InputPassword({ id, setPass, value }) {
   const focus = useRef();
   const [sight, setSight] = useState('password');
   return (
@@ -16,6 +16,7 @@ function InputPassword({ id, setPass }) {
       <input
         id={id}
         ref={focus}
+        value={value || ''}
         className="rounded-md pl-2 pr-11 py-3.5 outline-none focus:ring-1 focus:ring-gray-400 border border-gray-300 w-full"
         type={sight}
         required
@@ -28,5 +29,6 @@ function InputPassword({ id, setPass }) {
 InputPassword.propTypes = {
   id: P.string,
   setPass: P.func,
+  value: P.string,
 };
 export default InputPassword;

@@ -49,14 +49,17 @@ function Cadaster() {
           idMail={'email'}
           idPass={`password`}
           textBtn={`Cadastrar`}
+          value={pass}
         >
           <div className="text-start">
             <GoingTo onClick={() => ''} text={`Entrar`} destiny={`/`} />
           </div>
-          {!load && optionsMessages(res)}
         </Form>
-        {load && <BiLoader className="absolute text-2xl animate-spin bottom-48 flex mx-auto" />}
-        {error && <LogError />}
+        <div>
+          {!load && optionsMessages(res)}
+          {load && <BiLoader className="animate-spin text-2xl flex mx-auto" />}
+          {error && <LogError />}
+        </div>
       </FormContainer>
       <LoginPoster poster="bg-cadaster" />
     </MainContainer>

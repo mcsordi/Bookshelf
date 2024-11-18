@@ -9,7 +9,6 @@ import LoginPoster from '../../components/loginCadaster/LoginPoster';
 import FormContainer from '../../components/loginCadaster/FormContainer';
 import MainContainer from '../../components/loginCadaster/MainContainer';
 import { emailAdress } from '../../../App/context/emailContext';
-import Forgot from '../Forgot';
 
 const getUsers = async (setLoading, setError) => {
   try {
@@ -47,7 +46,7 @@ function Login() {
     }
   };
   if (validEmail) {
-    return <Forgot />;
+    return <Navigate to={`/forgot`} />;
   }
 
   if (currentUser) {
@@ -78,6 +77,7 @@ function Login() {
       <FormContainer>
         <Logo whereTo={'/'} />
         <Form
+          value={pass}
           handleSubmit={handleSubmit}
           setPass={(e) => setPass(e)}
           setEmail={(e) => setEmail(e)}
@@ -100,15 +100,15 @@ function Login() {
           <div className="flex justify-between text-start ">
             <GoingTo onClick={() => ''} text={`Cadastrar`} destiny={`/cadaster`} />
           </div>
-          {click && !loading && !error && (
-            <li className="absolute bottom-40 text-red-600 font-semibold">{invalidError}</li>
-          )}
-          {error && <LogError />}
         </Form>
-        {loading && <BiLoader className="flex absolute text-2xl animate-spin bottom-48  mx-auto" />}
-        {!validEmail && !invalidError && (
-          <div className="absolute bottom-40 text-red-600 font-semibold">{forgotError}</div>
-        )}
+        <div>
+          {click && !loading && !error && <div className="border-b-2 text-red-600 font-semibold">{invalidError}</div>}
+          {error && <LogError />}
+          {loading && <BiLoader className="flex text-2xl animate-spin mx-auto" />}
+          {!validEmail && !invalidError && !loading && (
+            <div className="border-b-2 text-red-600 font-semibold">{forgotError}</div>
+          )}
+        </div>
       </FormContainer>
       <LoginPoster poster="bg-poster" />
     </MainContainer>

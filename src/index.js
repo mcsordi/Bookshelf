@@ -10,7 +10,9 @@ import Writer from './App/pages/Writer/index.jsx';
 import Error from './App/pages/ErrorPage/index.jsx';
 import Login from './App/pages/Login/index.jsx';
 import Cadaster from './App/pages/Cadaster/index.jsx';
+import Forgot from './App/pages/Forgot/index.jsx';
 import EmailContext from './App/context/emailContext.jsx';
+import ResetPass from './App/pages/ResetPass/index.jsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
   {
     path: '/cadaster',
     element: <Cadaster />,
+  },
+  {
+    path: '/forgot',
+    element: <Forgot />,
+  },
+  {
+    path: '/reset',
+    element: <ResetPass />,
   },
   {
     path: '/',

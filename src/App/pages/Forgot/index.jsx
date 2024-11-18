@@ -4,8 +4,9 @@ import LoginPoster from '../../components/loginCadaster/LoginPoster';
 import { useContext, useEffect, useRef, useState } from 'react';
 import ForgotNumber from '../../components/forgetPassword/ForgotNumber';
 import { emailAdress } from '../../context/emailContext';
-import ResetPass from '../ResetPass';
 import Button from '../../components/user/Button';
+import { Navigate } from 'react-router-dom';
+import { BiLoader } from 'react-icons/bi';
 
 const updateOtp = async (code, email) => {
   const res = await fetch(`${process.env.REACT_APP_USERS}/${email}`, {
@@ -16,10 +17,17 @@ const updateOtp = async (code, email) => {
   return await res.json();
 };
 
-const verifyOpt = async (email) => {
-  const res = await fetch(`${process.env.REACT_APP_USER}/${email}`);
-  const resJson = await res.json();
-  return resJson;
+const verifyOpt = async (email, setLoad) => {
+  try {
+    setLoad(true);
+    const res = await fetch(`${process.env.REACT_APP_USER}/${email}`);
+    const resJson = await res.json();
+    return resJson;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoad(false);
+  }
 };
 
 function Forgot() {
@@ -30,14 +38,14 @@ function Forgot() {
   const [click, setClick] = useState();
   const [clicks, setClicks] = useState();
   const [inpuOpt, setInpuOpt] = useState();
-  const { adress } = useContext(emailAdress);
   const [opt, setOpt] = useState();
-
+  const [load, setLoad] = useState();
+  const { adress } = useContext(emailAdress);
   const validCode = opt?.find(({ recovery }) => recovery == inpuOpt);
   const randomNumber = Math.floor(Math.random() * 9000 + 1000);
 
   const handleOpt = async () => {
-    const response = await verifyOpt(adress);
+    const response = await verifyOpt(adress, setLoad);
     return setOpt(response);
   };
 
@@ -56,9 +64,12 @@ function Forgot() {
     e.preventDefault();
     return setInpuOpt(arr.join().replace(/,/g, '')), cleanInputs(), setClicks(e);
   };
+  if (!adress) {
+    return <Navigate to={`/`} />;
+  }
 
   if (validCode) {
-    return <ResetPass />;
+    return <Navigate to={`/reset`} />;
   }
 
   const cleanInputs = () => {
@@ -85,17 +96,15 @@ function Forgot() {
             <ForgotNumber refs={inp3} target={inp4} onChange={(e) => (arr[2] = e)} />
             <ForgotNumber refs={inp4} target={null} onChange={(e) => (arr[3] = e)} />
           </div>
+          {clicks && !validCode && !load && (
+            <div className="flex mx-auto text-red-600 font-medium">codigo não correspondente</div>
+          )}
+          {load && (
+            <div className="flex mx-auto text-2xl animate-spin">
+              <BiLoader />
+            </div>
+          )}
           <Button textBtn={`Validar`} />
-          {/* <button
-            className={`text-slate-950 text-lg font-medium hover:ring-2 hover:ring-gray-400
-          bg-yellow-500 transition-all  mt-2 p-3 rounded-md w-full`}
-            type="submit"
-            onClick={(e) => {
-              return setInpuOpt(arr.join().replace(/,/g, '')), cleanInputs(), setClicks(e);
-            }}
-          >
-            Validar
-          </button> */}
         </form>
 
         <div className="flex flex-row ">

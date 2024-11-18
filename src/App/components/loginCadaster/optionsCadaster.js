@@ -7,10 +7,10 @@ export const optionsMessages = (res) => {
       return;
     }
     case `Busca não possui resultados`: {
-      return <li className="absolute bottom-40 text-green-700 font-semibold">Novo usuário criado</li>;
+      return <div className="text-green-700 border-b-2 font-semibold">Novo usuário criado</div>;
     }
     default: {
-      return <li className="absolute bottom-40 text-red-600 font-semibold">Email já existente</li>;
+      return <div className="text-red-600 border-b-2 font-semibold">Email já existente</div>;
     }
   }
 };
