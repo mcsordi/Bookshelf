@@ -51,7 +51,7 @@ function Cadaster() {
           textBtn={`Cadastrar`}
         >
           <div className="text-start">
-            <GoingTo onClick={() => ''} text={`Logar`} destiny={`/`} />
+            <GoingTo onClick={() => ''} text={`Entrar`} destiny={`/`} />
           </div>
           {!load && optionsMessages(res)}
         </Form>

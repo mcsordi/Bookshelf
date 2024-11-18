@@ -9,6 +9,7 @@ import LoginPoster from '../../components/loginCadaster/LoginPoster';
 import FormContainer from '../../components/loginCadaster/FormContainer';
 import MainContainer from '../../components/loginCadaster/MainContainer';
 import { emailAdress } from '../../../App/context/emailContext';
+import Forgot from '../Forgot';
 
 const getUsers = async (setLoading, setError) => {
   try {
@@ -34,6 +35,7 @@ function Login() {
   const [forgotError, setForgotError] = useState();
   const [invalidError, setInvalidError] = useState();
   const { setAdress } = useContext(emailAdress);
+  const currentUser = localStorage.getItem('userEmail')?.length > 0;
 
   const emailValidate = async () => {
     const data = await getUsers(setLoading, setError);
@@ -45,10 +47,10 @@ function Login() {
     }
   };
   if (validEmail) {
-    return <Navigate to={`/forgot`} />;
+    return <Forgot />;
   }
 
-  if (localStorage.getItem('userEmail')?.length > 0) {
+  if (currentUser) {
     return <Navigate to={`/home`} />;
   }
 
@@ -81,7 +83,7 @@ function Login() {
           setEmail={(e) => setEmail(e)}
           idMail={'email'}
           idPass={`password`}
-          textBtn={`Logar`}
+          textBtn={`Entrar`}
           loading={loading}
           forget={
             <Link
