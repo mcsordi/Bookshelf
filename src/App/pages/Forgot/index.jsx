@@ -49,9 +49,9 @@ function Forgot() {
   const [opt, setOpt] = useState();
   const [load, setLoad] = useState();
   const { adress } = useContext(emailAdress);
-  console.log('Forgot ~ adress:', adress);
   const validCode = opt?.find(({ recovery }) => recovery == inpuOpt);
   const randomNumber = Math.floor(Math.random() * 9000 + 1000);
+  let count = 0;
 
   const handleOpt = async () => {
     const response = await verifyOpt(adress, setLoad);
@@ -61,8 +61,16 @@ function Forgot() {
   const handleNum = () => {
     return randomNumber;
   };
+
   useEffect(() => {
-    handleNum(), updateOtp(randomNumber, adress), sendEmail(randomNumber, adress);
+    const plus = count++;
+    if (plus == 1) {
+      sendEmail(randomNumber, adress);
+    }
+    if (click) {
+      sendEmail(randomNumber, adress);
+    }
+    handleNum(), updateOtp(randomNumber, adress);
   }, [click]);
 
   useEffect(() => {

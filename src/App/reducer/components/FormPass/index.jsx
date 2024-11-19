@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../../components/user/Button';
 import InputPassword from '../../../components/user/InputPassword';
 import { BiLoader } from 'react-icons/bi';
@@ -25,10 +25,18 @@ function FormPass() {
   const [pass, setPass] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState(false);
+  useEffect(() => {
+    return () => {
+      setTimeout(() => {
+        setClick(false);
+        setPass('');
+      }, 1500);
+    };
+  }, [click]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setClick(true);
+    setClick(e);
     updatePass(pass, emailValue, setLoading, setError);
   };
 
