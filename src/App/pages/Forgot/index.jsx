@@ -29,6 +29,14 @@ const verifyOpt = async (email, setLoad) => {
     setLoad(false);
   }
 };
+const sendEmail = async (opt, email) => {
+  const res = await fetch(process.env.REACT_APP_EMAIL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ opt: opt, email: email }),
+  });
+  return res;
+};
 
 function Forgot() {
   const inp1 = useRef();
@@ -41,6 +49,7 @@ function Forgot() {
   const [opt, setOpt] = useState();
   const [load, setLoad] = useState();
   const { adress } = useContext(emailAdress);
+  console.log('Forgot ~ adress:', adress);
   const validCode = opt?.find(({ recovery }) => recovery == inpuOpt);
   const randomNumber = Math.floor(Math.random() * 9000 + 1000);
 
@@ -53,7 +62,7 @@ function Forgot() {
     return randomNumber;
   };
   useEffect(() => {
-    handleNum(), updateOtp(randomNumber, adress);
+    handleNum(), updateOtp(randomNumber, adress), sendEmail(randomNumber, adress);
   }, [click]);
 
   useEffect(() => {
