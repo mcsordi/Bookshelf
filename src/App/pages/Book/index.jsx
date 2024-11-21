@@ -2,8 +2,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useFetch } from '../../../utils/useFetch';
 import InfoBook from '../../components/book/BgInfoBook';
 import WriterTag from '../../components/book/WriterTag';
-import Error from '../../components/general/Error';
 import Loading from '../Loading';
+import ErrorInitial from '../../components/ErrorInitial';
 
 function Book() {
   const url = process.env.REACT_APP_BOOK_ID;
@@ -25,7 +25,7 @@ function Book() {
   }
 
   if (error) {
-    return <Error />;
+    return <ErrorInitial />;
   }
   return (
     <div className="mx-auto flex">

@@ -4,8 +4,8 @@ import RenderCategories from '../../components/book/RenderCategories';
 import { useFetch } from '../../../utils/useFetch';
 import Poster from '../../components/general/Poster';
 import Loading from '../Loading';
-import Error from '../../components/general/Error';
 import { Navigate } from 'react-router-dom';
+import ErrorInitial from '../../components/ErrorInitial';
 
 function Home() {
   const { data, loading, error } = useFetch([
@@ -27,7 +27,7 @@ function Home() {
     return <Loading />;
   }
   if (error) {
-    return <Error />;
+    return <ErrorInitial />;
   }
   const filterBooks = books.filter((book) => book.category == target && book);
   return (

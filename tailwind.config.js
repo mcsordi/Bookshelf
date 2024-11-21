@@ -14,7 +14,7 @@ export const theme = {
     xl: '1280px',
   },
   backgroundImage: {
-    error: "url('/public/images/booksError.svg')",
+    error: "url('/public/images/404.svg')",
     poster: "url('/public/images/poster.png')",
     cadaster: "url('/public/images/poster2.png')",
     homePoster: "url('/public/images/bookshelf.jpg')",

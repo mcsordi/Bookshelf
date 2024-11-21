@@ -7,18 +7,19 @@ import Home from './App/pages/Home/index.jsx';
 import Book from './App/pages/Book/index.jsx';
 import MirrorPage from './App/pages/MirrorPage/index.jsx';
 import Writer from './App/pages/Writer/index.jsx';
-import Error from './App/pages/ErrorPage/index.jsx';
 import Login from './App/pages/Login/index.jsx';
 import Cadaster from './App/pages/Cadaster/index.jsx';
 import Forgot from './App/pages/Forgot/index.jsx';
 import EmailContext from './App/context/emailContext.jsx';
 import ResetPass from './App/pages/ResetPass/index.jsx';
+import ErrorInitial from './App/components/ErrorInitial/index.jsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Login />,
+    errorElement: <ErrorInitial />,
   },
   {
     path: '/cadaster',
@@ -35,7 +36,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <MirrorPage />,
-    errorElement: <Error text={`Página não Encontrada`} />,
     children: [
       { path: '/home', element: <Home /> },
       { path: '/book/:id/:writerId', element: <Book /> },

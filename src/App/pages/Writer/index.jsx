@@ -5,7 +5,7 @@ import SectionWriter from '../../components/writer/SectionWriter';
 import InfoWriter from '../../components/writer/InfoWriter';
 import PosterWriter from '../../components/writer/PosterWriter';
 import Loading from '../Loading';
-import Error from '../../components/general/Error';
+import ErrorInitial from '../../components/ErrorInitial';
 
 function Writer() {
   const writer = useParams().writerId;
@@ -20,7 +20,7 @@ function Writer() {
     return <Loading />;
   }
   if (error) {
-    return <Error />;
+    return <ErrorInitial />;
   }
   return (
     <section className="mx-auto">
