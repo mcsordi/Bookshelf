@@ -63,6 +63,10 @@ function Forgot() {
   };
 
   useEffect(() => {
+    sendEmail(randomNumber, adress);
+  }, []);
+
+  useEffect(() => {
     const plus = count++;
     if (plus == 1) {
       sendEmail(randomNumber, adress);
