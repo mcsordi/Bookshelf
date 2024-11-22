@@ -20,7 +20,7 @@ function Nav() {
       <nav className="flex my-auto justify-center gap-3 items-baseline">
         {profilePhoto ? (
           <img
-            className="max-w-10 h-10 rounded-full cursor-pointer"
+            className="min-w-10 h-10 rounded-full cursor-pointer"
             src={profilePhoto}
             onClick={() => (display == `hidden` ? setDisplay('flex') : setDisplay('hidden'))}
           />
